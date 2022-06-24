@@ -14,15 +14,13 @@ const queryClient = new QueryClient();
 
 // screens
 import Dashboard from './screens/dashboard/Dashboard';
-import BottomNavigation from './navigation';
+import Navigation from './navigation';
 
 const App = () => {
   return (
     <NativeBaseProvider>
       <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <BottomNavigation />
-        </NavigationContainer>
+        <Navigation />
       </QueryClientProvider>
     </NativeBaseProvider>
   );
