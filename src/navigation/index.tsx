@@ -85,7 +85,7 @@ const BottomNavigation = () => {
         component={Dashboard}
         options={{
           headerTitle: 'News App',
-          title: 'Dashboard',
+          // title: 'Dashboard',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="home" size={24} color={color} />
           ),
@@ -96,7 +96,7 @@ const BottomNavigation = () => {
         component={Bookmark}
         options={{
           headerTitle: 'News App',
-          title: 'Bookmark',
+          // title: 'Bookmark',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="bookmark" size={24} color={color} />
           ),

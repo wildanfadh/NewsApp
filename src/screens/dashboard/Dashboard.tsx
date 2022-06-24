@@ -11,32 +11,15 @@ import {
 } from 'native-base';
 import {useQuery} from 'react-query';
 
+// data
+import {getAllNews} from '../../api';
+
 // components
 import CardNews from '../../components/CardNews';
 import CarouselNews from '../../components/CarouselNews';
 
 const Dashboard = () => {
-  const [isLoading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState([]);
-
-  const getNews = async () => {
-    try {
-      const response = await fetch(
-        'https://berita-indo-api.vercel.app/v1/cnn-news',
-      );
-      const json = await response.json();
-      // console.log(json);
-      setData(json.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  React.useEffect(() => {
-    getNews();
-  }, []);
+  const {isLoading, data, refetch} = useQuery('news', getAllNews);
 
   // console.log(data);
   return isLoading ? (
@@ -66,6 +49,7 @@ const Dashboard = () => {
             // id={item.source.id}
             // author={item.author}
             image={item.image.small}
+            imageLg={item.image.large}
             title={item.title}
             url={item.link}
             date={item.isoDate}

@@ -10,7 +10,15 @@ import {
 } from 'react-query';
 import {NavigationContainer} from '@react-navigation/native';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: true,
+      refetchInterval: 60000,
+      refetchIntervalInBackground: true,
+    },
+  },
+});
 
 // screens
 import Dashboard from './screens/dashboard/Dashboard';

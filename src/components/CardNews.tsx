@@ -13,14 +13,30 @@ import {useNavigation} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import TimeAgo from 'react-native-timeago';
 
-const CardNews = ({id, author, image, title, url, date, description}) => {
+const CardNews = ({
+  id,
+  author,
+  image,
+  imageLg,
+  title,
+  url,
+  date,
+  description,
+}) => {
   // console.log(author);
   const navigation = useNavigation();
   let timestamp = date;
 
   const handleDetail = () => {
     // console.log('detail');
-    navigation.navigate('DetailNews');
+    navigation.navigate('DetailNews', {
+      title,
+      image,
+      imageLg,
+      url,
+      date,
+      description,
+    });
   };
   return (
     <Box
