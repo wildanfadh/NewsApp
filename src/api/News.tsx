@@ -2,18 +2,19 @@ import {BASE_URL} from '../config';
 import axios from 'axios';
 
 // const ApiUrl = `${BASE_URL}/top-headlines?`
-const requestOptions = ({action, bodyReq}) => {
-  method: action,
-  headers: {'Content-Type': 'application/json'},
-  body: JSON.stringify({bodyReq}),
+const requestOptions = ({action, headerReq, bodyReq}) => {
+  return {method: action, headers: headerReq, body: bodyReq};
 };
 
 const getAllNews = async () => {
   try {
     let response = await fetch(
-      // 'https://berita-indo-api.vercel.app/v1/cnn-news',
       BASE_URL,
-      requestOptions({action: 'GET'})
+      requestOptions({
+        action: 'GET',
+        headerReq: {'Content-Type': 'application/json'},
+        bodyReq: null,
+      }),
     );
     let json = await response.json();
     // let json = await response;
@@ -23,6 +24,39 @@ const getAllNews = async () => {
   }
 };
 
+const getNewsBookmark = async () => {
+  try {
+    let response = await fetch(
+      '../data/bookmark.json',
+      requestOptions({
+        action: 'GET',
+        headerReq: {'Content-Type': 'application/json'},
+        bodyReq: null,
+      }),
+    );
+    let json = await response.json();
+    // let json = await response;
+    return json.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
+const saveNewsToBookmark = async () => {
+  try {
+    let response = await fetch(
+      '../data/bookmark.json',
+      requestOptions({
+        action: 'POST',
+        headerReq: {'Content-Type': 'application/json'},
+        bodyReq: null,
+      }),
+    );
+    let json = await response.json();
+    return json.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-export {getAllNews};
+export {getAllNews, getNewsBookmark, saveNewsToBookmark};
