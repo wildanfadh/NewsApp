@@ -7,13 +7,15 @@ import {
   HStack,
   VStack,
   Spinner,
+  Alert,
   Text,
   Heading,
+  Link,
 } from 'native-base';
 
 const DetailNews = ({route}) => {
   // const [isLoading, setIsLoading] = React.useState(0);
-  const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState('');
 
   const dataDetail = [
     {
@@ -26,16 +28,14 @@ const DetailNews = ({route}) => {
     },
   ];
 
-  console.log(data);
-
   React.useEffect(() => {
-    if (data == null) {
+    if (data === '') {
       setData(dataDetail);
     }
   });
 
   // console.log(route.params.title);
-  return data == null ? (
+  return data === '' ? (
     <Box
       flex={1}
       backgroundColor="white"
@@ -56,6 +56,11 @@ const DetailNews = ({route}) => {
         <VStack space={3} my={3}>
           <Heading size="md">{route.params.title}</Heading>
           <Text>{route.params.description}</Text>
+          <Link href={route.params.url} isUnderlined={false}>
+            <Text mt="2" fontSize={15} fontWeight="medium" color="darkBlue.600">
+              Baca lebih lanjut
+            </Text>
+          </Link>
         </VStack>
       </Box>
     </ScrollView>
